@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cozy Cup Café | Artisanal Coffee & Handcrafted Delights</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#3E2723',
+                        espressoDark: '#2C1B18',
+                        cream: '#FFF8E7',
+                        creamDark: '#F4EAD3',
+                        caramel: '#C68B59',
+                        caramelHover: '#B27848',
+                        sage: '#879878',
+                        sageDark: '#6E7F60',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF8E7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C68B59;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3E2723;
+        }
+
+        /* Subtle pulse glow */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        .glow-effect {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        /* Glassmorphism elements */
+        .glass-card {
+            background: rgba(255, 248, 231, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-nav {
+            background: rgba(62, 39, 35, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-cream text-espresso font-sans antialiased selection:bg-caramel selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300" id="navbar">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between glass-nav rounded-b-2xl shadow-xl mt-0 sm:mt-2 sm:rounded-2xl sm:mx-4 lg:mx-auto">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full bg-caramel/20 border border-caramel/40 flex items-center justify-center text-caramel group-hover:bg-caramel group-hover:text-cream transition-all duration-300">
+                    <i class="fa-solid fa-mug-hot text-xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-cream group-hover:text-caramel transition-colors">The Cozy Cup</span>
+                    <span class="text-[10px] tracking-widest text-caramel uppercase -mt-1 font-semibold">Café & Bakery</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center space-x-8 text-cream/90 font-medium text-sm tracking-wide">
+                <a href="#home" class="hover:text-caramel transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-caramel hover:after:w-full after:transition-all">Home</a>
+                <a href="#menu" class="hover:text-caramel transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-caramel hover:after:w-full after:transition-all">Menu</a>
+                <a href="#about" class="hover:text-caramel transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-caramel hover:after:w-full after:transition-all">About Us</a>
+                <a href="#gallery" class="hover:text-caramel transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-caramel hover:after:w-full after:transition-all">Gallery</a>
+                <a href="#contact" class="hover:text-caramel transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-caramel hover:after:w-full after:transition-all">Visit Us</a>
+            </div>
+
+            <!-- Action Buttons & Cart -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <!-- Cart Trigger Button -->
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-full text-cream hover:text-caramel hover:bg-white/10 transition-colors focus:outline-none" aria-label="View Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-caramel text-cream text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-espresso hidden">0</span>
+                </button>
+
+                <!-- Reservation Button -->
+                <button onclick="openModal('reservation-modal')" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-caramel hover:bg-caramelHover text-cream font-medium text-sm shadow-lg shadow-caramel/25 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
+                    <i class="fa-regular fa-calendar-check mr-2"></i>
+                    Reserve Table
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-cream hover:bg-white/10 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-4 lg:mx-auto mt-2 bg-espresso border border-caramel/20 rounded-2xl p-5 shadow-2xl space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-cream/90 hover:text-caramel font-medium py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">Home</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block text-cream/90 hover:text-caramel font-medium py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">Menu</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-cream/90 hover:text-caramel font-medium py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">About Us</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block text-cream/90 hover:text-caramel font-medium py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">Gallery</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-cream/90 hover:text-caramel font-medium py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">Visit Us</a>
+            <button onclick="toggleMobileMenu(); openModal('reservation-modal')" class="w-full mt-2 py-3 rounded-xl bg-caramel hover:bg-caramelHover text-cream font-medium text-sm shadow-md transition-colors flex items-center justify-center">
+                <i class="fa-regular fa-calendar-check mr-2"></i>
+                Reserve Table
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+        <!-- Hero Background Image & Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&q=80&w=2000" alt="Cozy Cafe Interior" class="w-full h-full object-cover scale-105 animate-pulse-slow">
+            <div class="absolute inset-0 bg-gradient-to-r from-espressoDark/95 via-espresso/80 to-espressoDark/90"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]"></div>
+        </div>
+
+        <!-- Floating Decorative Element -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-caramel/20 rounded-full blur-3xl pointer-events-none glow-effect"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-cream">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-caramel/30 backdrop-blur-md mb-8 animate-fade-in">
+                <span class="w-2 h-2 rounded-full bg-sage animate-ping"></span>
+                <span class="text-xs sm:text-sm font-medium tracking-wide uppercase text-cream/90">100% Single-Origin Arabica Beans</span>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 text-cream drop-shadow-md">
+                Your Daily Dose of <span class="text-caramel italic">Happiness</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-cream/80 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Freshly brewed coffee, handcrafted delights, and cozy moments made just for you in the heart of the city.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-16">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full bg-caramel hover:bg-caramelHover text-cream font-semibold text-base shadow-xl shadow-caramel/30 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group">
+                    Explore Our Menu
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full bg-cream/10 hover:bg-cream/20 border border-cream/30 backdrop-blur-sm text-cream font-semibold text-base transition-all duration-300 flex items-center justify-center">
+                    Visit Our Café
+                </a>
+            </div>
+
+            <!-- Highlights Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-8 border-t border-cream/15 max-w-4xl mx-auto">
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <p class="font-serif text-2xl font-bold text-caramel">4.9 ★</p>
+                    <p class="text-xs text-cream/70 font-medium uppercase mt-1">2k+ Happy Reviews</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <p class="font-serif text-2xl font-bold text-caramel">100%</p>
+                    <p class="text-xs text-cream/70 font-medium uppercase mt-1">Organic Beans</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <p class="font-serif text-2xl font-bold text-caramel">Daily</p>
+                    <p class="text-xs text-cream/70 font-medium uppercase mt-1">Fresh Pastries</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <p class="font-serif text-2xl font-bold text-caramel">Free</p>
+                    <p class="text-xs text-cream/70 font-medium uppercase mt-1">High-Speed Wi-Fi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED MENU SECTION -->
+    <section id="menu" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-caramel text-sm font-semibold uppercase tracking-widest block mb-2">Handcrafted Delights</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso mb-4">Our Specialty Menu</h2>
+            <p class="text-espresso/70 text-base sm:text-lg">Every beverage is handcrafted with passion and paired with freshly baked artisanal delicacies.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <button onclick="filterMenu('all')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-espresso text-cream shadow-md" data-category="all">All Items</button>
+            <button onclick="filterMenu('coffee')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-creamDark text-espresso/80 hover:bg-caramel hover:text-cream" data-category="coffee">Coffee & Brews</button>
+            <button onclick="filterMenu('food')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-creamDark text-espresso/80 hover:bg-caramel hover:text-cream" data-category="food">Food & Desserts</button>
+            <button onclick="filterMenu('special')" class="menu-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 bg-creamDark text-espresso/80 hover:bg-caramel hover:text-cream" data-category="special">Special Drinks</button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-grid">
+            <!-- Menu items injected dynamically via JS -->
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-24 bg-espresso text-cream relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Column: Story Images Stack -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-caramel/20">
+                        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=80&w=1000" alt="Barista brewing coffee" class="w-full h-[400px] sm:h-[480px] object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <!-- Secondary Floating Image -->
+                    <div class="absolute -bottom-8 -right-6 w-1/2 rounded-2xl overflow-hidden border-4 border-espresso shadow-2xl z-20 hidden sm:block">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600" alt="Latte art close up" class="w-full h-48 object-cover">
+                    </div>
+                    <!-- Badge Card -->
+                    <div class="absolute -top-6 -left-6 bg-caramel text-cream p-5 rounded-2xl shadow-xl z-20 max-w-[180px]">
+                        <p class="font-serif text-3xl font-bold">10+</p>
+                        <p class="text-xs font-medium uppercase tracking-wider">Years of Brewing Excellence</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Narrative Content -->
+                <div class="space-y-6">
+                    <span class="text-caramel font-semibold text-sm uppercase tracking-widest">Our Story</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold leading-tight text-cream">
+                        Crafting Warmth, One Cup at a Time
+                    </h2>
+                    <p class="text-cream/80 text-base sm:text-lg leading-relaxed font-light">
+                        Founded in 2016, <strong class="text-caramel font-medium">The Cozy Cup Café</strong> was born out of a simple passion: to create a sanctuary where people can slow down, savor exceptional coffee, and feel genuinely at home.
+                    </p>
+                    <p class="text-cream/70 text-base leading-relaxed">
+                        We ethically source single-origin Arabica beans from sustainably managed farms, roast them to perfection, and complement every brew with freshly baked pastries crafted daily in our open kitchen.
+                    </p>
+
+                    <!-- Features Grid -->
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-caramel/20 flex items-center justify-center text-caramel flex-shrink-0">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-cream text-base">Ethically Sourced</h4>
+                                <p class="text-xs text-cream/60">Fair trade beans from top farms</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-caramel/20 flex items-center justify-center text-caramel flex-shrink-0">
+                                <i class="fa-solid fa-wheat-awn"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-cream text-base">Artisan Bakery</h4>
+                                <p class="text-xs text-cream/60">Baked fresh every morning</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-caramel/20 flex items-center justify-center text-caramel flex-shrink-0">
+                                <i class="fa-solid fa-couch"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-cream text-base">Cozy Atmosphere</h4>
+                                <p class="text-xs text-cream/60">Designed for work & relaxation</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-caramel/20 flex items-center justify-center text-caramel flex-shrink-0">
+                                <i class="fa-solid fa-wifi"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-cream text-base">High-Speed Wi-Fi</h4>
+                                <p class="text-xs text-cream/60">Power outlets at every table</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <button onclick="openModal('reservation-modal')" class="px-8 py-3.5 rounded-full bg-caramel hover:bg-caramelHover text-cream font-semibold transition-all shadow-lg hover:shadow-caramel/40">
+                            Book a Cozy Table
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-caramel text-sm font-semibold uppercase tracking-widest block mb-2">Visual Moments</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso mb-4">Inside The Cozy Cup</h2>
+            <p class="text-espresso/70 text-base sm:text-lg">Take a glimpse into our cozy corners, handcrafted brews, and warm community moments.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div class="group relative rounded-2xl overflow-hidden h-64 sm:h-80 shadow-md">
+                <img src="https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&q=80&w=800" alt="Latte Art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-cream font-serif text-lg font-semibold">Artisanal Pour-Over</span>
+                </div>
+            </div>
+
+            <div class="group relative rounded-2xl overflow-hidden h-64 sm:h-80 shadow-md lg:col-span-2">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200" alt="Warm Cafe Seating" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-cream font-serif text-lg font-semibold">Cozy Work & Chill Spaces</span>
+                </div>
+            </div>
+
+            <div class="group relative rounded-2xl overflow-hidden h-64 sm:h-80 shadow-md">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800" alt="Fresh Pastries" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-cream font-serif text-lg font-semibold">Fresh Croissants Daily</span>
+                </div>
+            </div>
+
+            <div class="group relative rounded-2xl overflow-hidden h-64 sm:h-80 shadow-md lg:col-span-2">
+                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=1200" alt="Beans Roasting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-cream font-serif text-lg font-semibold">In-House Small Batch Roasting</span>
+                </div>
+            </div>
+
+            <div class="group relative rounded-2xl overflow-hidden h-64 sm:h-80 shadow-md">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&q=80&w=800" alt="Iced Drinks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-cream font-serif text-lg font-semibold">Signature Cold Beverages</span>
+                </div>
+            </div>
+
+            <div class="group relative rounded-2xl overflow-hidden h-64 sm:h-80 shadow-md">
+                <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&q=80&w=800" alt="Evening Vibe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <span class="text-cream font-serif text-lg font-semibold">Warm Ambient Evenings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & LOCATION SECTION -->
+    <section id="contact" class="py-24 bg-creamDark/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-caramel text-sm font-semibold uppercase tracking-widest block mb-2">Find Your Way</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso mb-4">Visit Our Café</h2>
+                <p class="text-espresso/70 text-base sm:text-lg">We can’t wait to welcome you with a fresh cup and a warm smile.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Info Cards & Map Mockup -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Location Card -->
+                    <div class="p-6 rounded-3xl bg-cream border border-caramel/20 shadow-lg space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-caramel/10 flex items-center justify-center text-caramel text-xl">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-espresso text-lg">Café Address</h4>
+                                <p class="text-sm text-espresso/70">124 Roasted Bean Boulevard, Jubilee Hills, Hyderabad, Telangana</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hours Card -->
+                    <div class="p-6 rounded-3xl bg-cream border border-caramel/20 shadow-lg space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-caramel/10 flex items-center justify-center text-caramel text-xl">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-espresso text-lg">Opening Hours</h4>
+                                <p class="text-sm text-espresso/70">Mon – Fri: 7:00 AM – 10:00 PM</p>
+                                <p class="text-sm text-espresso/70">Sat – Sun: 8:00 AM – 11:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info Card -->
+                    <div class="p-6 rounded-3xl bg-cream border border-caramel/20 shadow-lg space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-2xl bg-caramel/10 flex items-center justify-center text-caramel text-xl">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-espresso text-lg">Get in Touch</h4>
+                                <p class="text-sm text-espresso/70">+91 98765 43210 / hello@cozycupcafe.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Message Form -->
+                <div class="lg:col-span-7 bg-cream p-8 sm:p-10 rounded-3xl border border-caramel/20 shadow-xl">
+                    <h3 class="font-serif text-2xl font-bold text-espresso mb-2">Send Us a Message</h3>
+                    <p class="text-sm text-espresso/70 mb-8">Have a question or looking to host a private gathering? Reach out to us below.</p>
+
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-2">Your Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl border border-espresso/15 bg-white text-espresso focus:outline-none focus:ring-2 focus:ring-caramel text-sm" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-2">Email Address</label>
+                                <input type="email" required class="w-full px-4 py-3 rounded-xl border border-espresso/15 bg-white text-espresso focus:outline-none focus:ring-2 focus:ring-caramel text-sm" placeholder="john@example.com">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-2">Subject</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl border border-espresso/15 bg-white text-espresso focus:outline-none focus:ring-2 focus:ring-caramel text-sm" placeholder="General Inquiry / Event Hosting">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-2">Your Message</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl border border-espresso/15 bg-white text-espresso focus:outline-none focus:ring-2 focus:ring-caramel text-sm" placeholder="How can we help you?"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-caramel hover:bg-caramelHover text-cream font-semibold text-base shadow-lg transition-all duration-200">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-espresso text-cream pt-16 pb-8 border-t border-caramel/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-cream/10">
+                
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <a href="#home" class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-caramel/20 flex items-center justify-center text-caramel">
+                            <i class="fa-solid fa-mug-hot text-lg"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-cream">The Cozy Cup</span>
+                    </a>
+                    <p class="text-sm text-cream/70 leading-relaxed font-light">
+                        Handcrafted coffee and freshly baked artisanal delights served in a cozy, ambient environment.
+                    </p>
+                    <div class="flex space-x-3 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream hover:text-caramel hover:border-caramel transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream hover:text-caramel hover:border-caramel transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-cream hover:text-caramel hover:border-caramel transition-colors"><i class="fa-brands fa-twitter text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-caramel mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-cream/70">
+                        <li><a href="#home" class="hover:text-caramel transition-colors">Home</a></li>
+                        <li><a href="#menu" class="hover:text-caramel transition-colors">Our Menu</a></li>
+                        <li><a href="#about" class="hover:text-caramel transition-colors">Our Story</a></li>
+                        <li><a href="#gallery" class="hover:text-caramel transition-colors">Visual Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-caramel transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Opening Hours -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-caramel mb-4">Opening Hours</h4>
+                    <ul class="space-y-2 text-sm text-cream/70">
+                        <li class="flex justify-between"><span>Mon - Fri:</span> <span class="font-medium text-cream">7:00 AM - 10:00 PM</span></li>
+                        <li class="flex justify-between"><span>Saturday:</span> <span class="font-medium text-cream">8:00 AM - 11:00 PM</span></li>
+                        <li class="flex justify-between"><span>Sunday:</span> <span class="font-medium text-cream">8:00 AM - 11:00 PM</span></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-caramel mb-4">Newsletter</h4>
+                    <p class="text-xs text-cream/70 mb-4">Subscribe to receive seasonal coffee updates and exclusive event invites.</p>
+                    <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                        <input type="email" required placeholder="Enter your email" class="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-cream placeholder:text-cream/40 text-sm focus:outline-none focus:ring-2 focus:ring-caramel">
+                        <button type="submit" class="w-full py-2.5 rounded-xl bg-caramel hover:bg-caramelHover text-cream font-medium text-sm transition-colors">Subscribe</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 text-center text-xs text-cream/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 The Cozy Cup Café. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-cream">Privacy Policy</a>
+                    <a href="#" class="hover:text-cream">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHOPPING CART SLIDE-OUT DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-none transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cart-panel" class="w-screen max-w-md bg-cream shadow-2xl pointer-events-auto transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+                
+                <!-- Drawer Header -->
+                <div class="p-6 bg-espresso text-cream flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-bag-shopping text-caramel text-xl"></i>
+                        <h3 class="font-serif text-xl font-bold">Your Coffee Order</h3>
+                    </div>
+                    <button onclick="toggleCart()" class="text-cream/70 hover:text-cream p-1">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Order List -->
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Cart items rendered here -->
+                </div>
+
+                <!-- Footer Summary & Checkout -->
+                <div class="p-6 border-t border-espresso/10 bg-creamDark/40 space-y-4">
+                    <div class="flex justify-between text-sm text-espresso/70">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal" class="font-semibold text-espresso">₹0</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-espresso/70">
+                        <span>Taxes & Charges (5%)</span>
+                        <span id="cart-tax" class="font-semibold text-espresso">₹0</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold text-espresso pt-2 border-t border-espresso/10">
+                        <span>Total Payable</span>
+                        <span id="cart-total" class="text-caramel">₹0</span>
+                    </div>
+                    <button onclick="handleCheckout()" class="w-full py-4 rounded-xl bg-caramel hover:bg-caramelHover text-cream font-bold text-base shadow-lg transition-all">
+                        Proceed to Checkout
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLE RESERVATION MODAL -->
+    <div id="reservation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-cream w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative border border-caramel/20">
+            <button onclick="closeModal('reservation-modal')" class="absolute top-5 right-5 text-espresso/50 hover:text-espresso p-1">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-caramel/10 text-caramel flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-espresso">Reserve a Table</h3>
+                <p class="text-xs text-espresso/70 mt-1">Book your cozy spot in advance to avoid waiting.</p>
+            </div>
+
+            <form onsubmit="handleReservationSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-1">Full Name</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl border border-espresso/15 bg-white text-espresso text-sm focus:ring-2 focus:ring-caramel focus:outline-none" placeholder="Jane Doe">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-1">Phone</label>
+                        <input type="tel" required class="w-full px-4 py-2.5 rounded-xl border border-espresso/15 bg-white text-espresso text-sm focus:ring-2 focus:ring-caramel focus:outline-none" placeholder="+91 9876543210">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-1">Guests</label>
+                        <select required class="w-full px-4 py-2.5 rounded-xl border border-espresso/15 bg-white text-espresso text-sm focus:ring-2 focus:ring-caramel focus:outline-none">
+                            <option value="1">1 Person</option>
+                            <option value="2" selected>2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5+">5+ People (Group)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-1">Date</label>
+                        <input type="date" required class="w-full px-4 py-2.5 rounded-xl border border-espresso/15 bg-white text-espresso text-sm focus:ring-2 focus:ring-caramel focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-1">Time Slot</label>
+                        <select required class="w-full px-4 py-2.5 rounded-xl border border-espresso/15 bg-white text-espresso text-sm focus:ring-2 focus:ring-caramel focus:outline-none">
+                            <option>09:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>02:00 PM</option>
+                            <option>05:00 PM</option>
+                            <option>07:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-espresso uppercase tracking-wider mb-1">Special Requests</label>
+                    <textarea rows="2" class="w-full px-4 py-2 rounded-xl border border-espresso/15 bg-white text-espresso text-sm focus:ring-2 focus:ring-caramel focus:outline-none" placeholder="Window seat, birthday celebration, etc."></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-caramel hover:bg-caramelHover text-cream font-semibold text-sm transition-all shadow-md">
+                    Confirm Reservation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- QUICK ITEM VIEW MODAL -->
+    <div id="quickview-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-cream w-full max-w-md rounded-3xl overflow-hidden shadow-2xl relative border border-caramel/20">
+            <button onclick="closeModal('quickview-modal')" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="quickview-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-espresso text-cream px-6 py-4 rounded-2xl shadow-2xl border border-caramel/40 flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-full bg-caramel/20 text-caramel flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-check text-sm"></i>
+            </div>
+            <p id="toast-msg" class="text-sm font-medium">Item added to cart!</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // MENU DATA SOURCE
+        const menuItems = [
+            // Coffee Category
+            {
+                id: 'c1',
+                name: 'Espresso',
+                price: 99,
+                category: 'coffee',
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&q=80&w=600',
+                description: 'Rich, bold, and concentrated single shot pulled from freshly ground Arabica beans.',
+                badge: 'Classic'
+            },
+            {
+                id: 'c2',
+                name: 'Cappuccino',
+                price: 149,
+                category: 'coffee',
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&q=80&w=600',
+                description: 'Equal parts espresso, steamed milk, and velvety micro-foam dusted with organic cocoa powder.',
+                badge: 'Popular'
+            },
+            {
+                id: 'c3',
+                name: 'Café Latte',
+                price: 169,
+                category: 'coffee',
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&q=80&w=600',
+                description: 'Smooth espresso balanced with rich steamed milk and topped with delicate barista art.',
+                badge: 'Bestseller'
+            },
+            {
+                id: 'c4',
+                name: 'Caramel Macchiato',
+                price: 189,
+                category: 'coffee',
+                rating: 5.0,
+                image: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&q=80&w=600',
+                description: 'Fresh espresso poured over vanilla-infused milk, finished with buttery caramel drizzle.',
+                badge: 'Signature'
+            },
+            {
+                id: 'c5',
+                name: 'Cold Coffee',
+                price: 159,
+                category: 'coffee',
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=600',
+                description: 'Chilled espresso blended with whole milk, ice, and a scoop of vanilla bean ice cream.',
+                badge: 'Refresh'
+            },
+
+            // Food & Desserts Category
+            {
+                id: 'f1',
+                name: 'Chocolate Brownie',
+                price: 129,
+                category: 'food',
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&q=80&w=600',
+                description: 'Warm, fudgy dark chocolate brownie baked in-house with toasted walnuts.',
+                badge: 'Warm'
+            },
+            {
+                id: 'f2',
+                name: 'Blueberry Cheesecake',
+                price: 199,
+                category: 'food',
+                rating: 5.0,
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&q=80&w=600',
+                description: 'Creamy New York style cheesecake topped with lush compote of wild blueberries.',
+                badge: 'Chef Choice'
+            },
+            {
+                id: 'f3',
+                name: 'Butter Croissant',
+                price: 119,
+                category: 'food',
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=600',
+                description: 'Flaky, golden-brown puff pastry baked fresh every morning using French butter.',
+                badge: 'Fresh'
+            },
+            {
+                id: 'f4',
+                name: 'Grilled Veg Sandwich',
+                price: 179,
+                category: 'food',
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&q=80&w=600',
+                description: 'Multigrain bread stuffed with grilled zucchini, bell peppers, pesto, and melted mozzarella.',
+                badge: 'Savory'
+            },
+            {
+                id: 'f5',
+                name: 'Classic Waffles',
+                price: 169,
+                category: 'food',
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&q=80&w=600',
+                description: 'Crisp Belgian waffles served with maple syrup, whipped cream, and fresh berries.',
+                badge: 'Sweet'
+            },
+
+            // Special Drinks Category
+            {
+                id: 's1',
+                name: 'Hazelnut Cold Brew',
+                price: 199,
+                category: 'special',
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=600',
+                description: '18-hour cold steeped coffee infused with natural roasted hazelnut syrup.',
+                badge: 'Specialty'
+            },
+            {
+                id: 's2',
+                name: 'Matcha Green Tea Latte',
+                price: 209,
+                category: 'special',
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&q=80&w=600',
+                description: 'Ceremonial grade Japanese Uji matcha whisked with oat milk and honey.',
+                badge: 'Healthy'
+            }
+        ];
+
+        // STATE MANAGEMENT
+        let cart = [];
+
+        // RENDER MENU
+        function renderMenu(itemsToRender) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = itemsToRender.map(item => `
+                <div class="group bg-cream rounded-3xl p-4 border border-caramel/15 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Product Image Container -->
+                        <div class="relative rounded-2xl overflow-hidden h-52 mb-4 bg-espresso/5">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-espresso/80 backdrop-blur-md text-caramel text-xs font-semibold px-3 py-1 rounded-full border border-caramel/30">
+                                ${item.badge}
+                            </span>
+                            <button onclick="openQuickView('${item.id}')" class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 text-espresso flex items-center justify-center shadow-md hover:bg-caramel hover:text-white transition-colors" title="Quick View">
+                                <i class="fa-regular fa-eye text-sm"></i>
+                            </button>
+                        </div>
+
+                        <!-- Card Info -->
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-espresso group-hover:text-caramel transition-colors">${item.name}</h3>
+                            <span class="font-serif text-lg font-bold text-caramel">₹${item.price}</span>
+                        </div>
+
+                        <!-- Rating & Description -->
+                        <div class="flex items-center text-xs text-amber-600 mb-2 font-semibold">
+                            <i class="fa-solid fa-star mr-1"></i> ${item.rating} <span class="text-espresso/40 ml-1 font-normal">(100+ orders)</span>
+                        </div>
+                        <p class="text-xs text-espresso/70 leading-relaxed line-clamp-2 mb-4">${item.description}</p>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <button onclick="addToCart('${item.id}')" class="w-full py-2.5 rounded-xl bg-creamDark hover:bg-caramel text-espresso hover:text-cream font-medium text-sm transition-all duration-200 flex items-center justify-center space-x-2 border border-caramel/20">
+                        <i class="fa-solid fa-plus text-xs"></i>
+                        <span>Add to Order</span>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // FILTER MENU CATEGORY
+        function filterMenu(category) {
+            // Update Tab styles
+            document.querySelectorAll('.menu-tab').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.remove('bg-creamDark', 'text-espresso/80');
+                    btn.classList.add('bg-espresso', 'text-cream', 'shadow-md');
+                } else {
+                    btn.classList.remove('bg-espresso', 'text-cream', 'shadow-md');
+                    btn.classList.add('bg-creamDark', 'text-espresso/80');
+                }
+            });
+
+            if (category === 'all') {
+                renderMenu(menuItems);
+            } else {
+                const filtered = menuItems.filter(i => i.category === category);
+                renderMenu(filtered);
+            }
+        }
+
+        // CART LOGIC
+        function addToCart(itemId) {
+            const item = menuItems.find(i => i.id === itemId);
+            const existing = cart.find(i => i.id === itemId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added ${item.name} to your order`);
+        }
+
+        function updateQuantity(itemId, delta) {
+            const index = cart.findIndex(i => i.id === itemId);
+            if (index !== -1) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalCount = cart.reduce((acc, i) => acc + i.quantity, 0);
+
+            // Badge count
+            if (totalCount > 0) {
+                badge.innerText = totalCount;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            // Render Items in Drawer
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12 text-espresso/50">
+                        <i class="fa-solid fa-mug-saucer text-4xl mb-3 text-caramel/40"></i>
+                        <p class="text-sm font-medium">Your coffee basket is empty.</p>
+                        <p class="text-xs mt-1">Explore our menu and add items!</p>
+                    </div>
+                `;
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between p-3 rounded-2xl bg-white border border-espresso/10 shadow-sm">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl">
+                        <div class="flex-1 ml-3">
+                            <h4 class="font-serif font-bold text-sm text-espresso">${item.name}</h4>
+                            <p class="text-xs text-caramel font-semibold">₹${item.price}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-creamDark px-2 py-1 rounded-lg">
+                            <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-espresso text-xs font-bold hover:text-caramel">-</button>
+                            <span class="text-xs font-bold text-espresso">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-espresso text-xs font-bold hover:text-caramel">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Subtotal calculation
+            const subtotal = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax;
+
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
+            document.getElementById('cart-tax').innerText = `₹${tax}`;
+            document.getElementById('cart-total').innerText = `₹${total}`;
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const panel = document.getElementById('cart-panel');
+            const backdrop = document.getElementById('cart-backdrop');
+
+            if (panel.classList.contains('translate-x-full')) {
+                drawer.classList.remove('pointer-events-none', 'opacity-0');
+                backdrop.classList.remove('pointer-events-none');
+                panel.classList.remove('translate-x-full');
+            } else {
+                panel.classList.add('translate-x-full');
+                backdrop.classList.add('pointer-events-none');
+                setTimeout(() => {
+                    drawer.classList.add('pointer-events-none', 'opacity-0');
+                }, 300);
+            }
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+            alert("Thank you for your order! Your delicious treats will be prepared right away.");
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // QUICK VIEW MODAL LOGIC
+        function openQuickView(itemId) {
+            const item = menuItems.find(i => i.id === itemId);
+            const content = document.getElementById('quickview-content');
+
+            content.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <span class="text-xs font-semibold uppercase text-caramel tracking-wider">${item.badge}</span>
+                    <div class="flex justify-between items-baseline mt-1 mb-2">
+                        <h3 class="font-serif text-2xl font-bold text-espresso">${item.name}</h3>
+                        <span class="font-serif text-xl font-bold text-caramel">₹${item.price}</span>
+                    </div>
+                    <p class="text-sm text-espresso/70 leading-relaxed mb-6">${item.description}</p>
+                    <button onclick="addToCart('${item.id}'); closeModal('quickview-modal')" class="w-full py-3 rounded-xl bg-caramel hover:bg-caramelHover text-cream font-semibold transition-all">
+                        Add to Order • ₹${item.price}
+                    </button>
+                </div>
+            `;
+            openModal('quickview-modal');
+        }
+
+        // MODAL UTILITIES
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // TOAST NOTIFICATION
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        // FORM HANDLERS
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            closeModal('reservation-modal');
+            showToast("Table reservation confirmed! We'll see you soon.");
+            e.target.reset();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast("Message sent! We'll get back to you shortly.");
+            e.target.reset();
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast("Subscribed! Thank you for joining our community.");
+            e.target.reset();
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // NAVBAR SCROLL EFFECT
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-2xl');
+            } else {
+                navbar.classList.remove('shadow-2xl');
+            }
+        });
+
+        // INITIALIZATION
+        window.onload = function() {
+            renderMenu(menuItems);
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
